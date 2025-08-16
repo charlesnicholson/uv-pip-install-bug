@@ -38,14 +38,17 @@ fi
 MY_VENV=${SCRIPT_DIR}/venv
 MY_PYTHON=${MY_VENV}/bin/python
 
-for i in $(seq 1 100); do
-    if [ -d "$MY_VENV" ]; then
-        rm -rf $MY_VENV
-    fi
+if [ -d "$MY_VENV" ]; then
+rm -rf $MY_VENV
+fi
 
+$UV venv -p 3.13 ${MY_VENV} -q
+
+for i in $(seq 1 100); do
     echo "$i/100"
 
-    $UV venv -p 3.13 ${MY_VENV} -q
     $UV pip install -q -p $MY_PYTHON -e mycompany.a/ --config-settings editable_mode=compat
     $UV pip install -q -p $MY_PYTHON -e mycompany.b/ --config-settings editable_mode=compat
+    $UV pip uninstall -q -p $MY_PYTHON mycompany.a
+    $UV pip uninstall -q -p $MY_PYTHON mycompany.b
 done

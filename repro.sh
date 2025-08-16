@@ -29,7 +29,6 @@ case "$(uname -s)" in
 esac
 
 UV=${SCRIPT_DIR}/${UV_NAME}/uv
-
 if [ ! -f "$UV" ]; then
     curl -sL -o "$UV_LOCAL_TGZ" "$UV_URL"
     tar -xzf "$UV_LOCAL_TGZ" && rm "$UV_LOCAL_TGZ"
@@ -49,6 +48,5 @@ for i in $(seq 1 100); do
 
     $UV pip install -q -p $MY_PYTHON -e mycompany.a/ --config-settings editable_mode=compat
     $UV pip install -q -p $MY_PYTHON -e mycompany.b/ --config-settings editable_mode=compat
-    $UV pip uninstall -q -p $MY_PYTHON mycompany.a
-    $UV pip uninstall -q -p $MY_PYTHON mycompany.b
+    $UV pip uninstall -q -p $MY_PYTHON mycompany.b mycompany.a
 done

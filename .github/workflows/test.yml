@@ -1,0 +1,9 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  repro:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Repro
+      run: ./repro.sh

@@ -1,0 +1,12 @@
+[project]
+name = "mycompany.b"
+version = "0.0.0"
+dependencies = ["mycompany.a"]
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "mycompany.b"
+module-root = ""
